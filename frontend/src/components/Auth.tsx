@@ -23,7 +23,7 @@ function Auth({type}: {type: "signin" | "signup"}) {
             localStorage.setItem('token', jwt);
             navigate('/blogs');
         } catch (error) {
-            console.log("Error occurs while creating user", error);
+            console.log("Error while signing up user", error);
         }
     }
   return (
