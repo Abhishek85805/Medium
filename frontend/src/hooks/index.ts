@@ -20,11 +20,31 @@ export function useBlogs(){
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         }).then((response)=>{
-            console.log(response.data);
             setBlogs(response.data);
             setLoading(false);
         })
     }, []);
 
     return {loading, blogs};
+}
+
+export function useBlog(id : string){
+    const [loading, setLoading] = useState(true);
+    const [blog, setBlog] = useState<Blog>();
+    console.log(id);
+
+    useEffect(() => {
+        console.log(`${BACKEND_URL}/api/v1/blog/${id}`);
+        axios.get(`${BACKEND_URL}/api/v1/blog/${id}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then((response)=>{
+            console.log(response);
+            setBlog(response.data);
+            setLoading(false);
+        })
+    }, [id]);
+
+    return {loading, blog}
 }
